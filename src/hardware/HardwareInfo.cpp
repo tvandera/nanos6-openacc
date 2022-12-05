@@ -6,6 +6,7 @@
 
 #include <config.h>
 #include <nanos6/task-instantiation.h>
+#include <iostream>
 
 #include "HardwareInfo.hpp"
 #include "hwinfo/HostInfo.hpp"
@@ -48,6 +49,7 @@ void HardwareInfo::initializeDeviceServices()
 	_infos[nanos6_host_device]->initializeDeviceServices();
 #ifdef USE_OPENACC
 	_infos[nanos6_openacc_device]->initializeDeviceServices();
+	std::cout << "HardwareInfo: detected OpenACC devices: " << _infos[nanos6_openacc_device]->getComputePlaceCount() << std::endl;
 #endif
 #ifdef USE_CUDA
 	_infos[nanos6_cuda_device]->initializeDeviceServices();

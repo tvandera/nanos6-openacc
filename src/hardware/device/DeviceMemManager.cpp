@@ -5,6 +5,7 @@
 */
 
 #include <algorithm>
+#include <iostream>
 
 #include "DeviceMemManager.hpp"
 
@@ -31,6 +32,8 @@ void DeviceMemManager::initialize(void)
 void *DeviceMemManager::alloc(size_t size, int deviceNum)
 {
 	assert((size > 0) && (deviceNum >= 0) && (totalDevices > 0));
+
+	std::cout << "DeviceMemManager: received allocation request for device " << deviceNum << std::endl;
 
 	// deviceNum temporarily will be just (deviceNum % totalDevices)
 
@@ -125,6 +128,7 @@ size_t DeviceMemManager::computeDeviceAffinity(Task *task)
 	);
 
 	size_t ret = std::distance(deviceScore, std::max_element(deviceScore, deviceScore + totalDevices));
+	std::cout << "DeviceMemManager: task " << task << " scheduled on device no. " << ret << std::endl;
 	return ret;
 
 }
