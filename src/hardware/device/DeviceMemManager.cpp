@@ -49,7 +49,9 @@ void *DeviceMemManager::alloc(size_t size, int deviceNum)
 	_directory.insert(std::make_pair(ret, entry));
 	_lock.writeUnlock();
 
-	std::cout << "DeviceMemManager: allocated " << ret << " on device " << deviceNum << std::endl;
+	std::cout << "DeviceMemManager: allocated " << ret << 
+		" size: " << size << 
+		" on device " << deviceNum << std::endl;
 
 	return ret;
 }
