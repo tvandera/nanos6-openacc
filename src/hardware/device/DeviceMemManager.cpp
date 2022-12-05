@@ -119,8 +119,11 @@ size_t DeviceMemManager::computeDeviceAffinity(Task *task)
 				DeviceMemEntry dirEntry = {0, 0};
 				if (getEntry(address, &dirEntry)) {
 					int device = dirEntry.deviceNum;
+					std::cout << "DeviceMemManager: task " << task << " address 0x" << address << " on device no. " << device << std::endl;
 					size_t accessSize = access->getAccessRegion().getSize();
 					deviceScore[device] += accessSize;
+				} else {
+					std::cout << "DeviceMemManager: task " << task << " address 0x" << address << " NO device" << std::endl;
 				}
 			}
 			return true;
