@@ -33,7 +33,6 @@ void *DeviceMemManager::alloc(size_t size, int deviceNum)
 {
 	assert((size > 0) && (deviceNum >= 0) && (totalDevices > 0));
 
-	std::cout << "DeviceMemManager: received allocation request for device " << deviceNum << std::endl;
 
 	// deviceNum temporarily will be just (deviceNum % totalDevices)
 
@@ -49,6 +48,8 @@ void *DeviceMemManager::alloc(size_t size, int deviceNum)
 	_lock.writeLock();
 	_directory.insert(std::make_pair(ret, entry));
 	_lock.writeUnlock();
+
+	std::cout << "DeviceMemManager: allocated " << ret << " on device " << deviceNum << std::endl;
 
 	return ret;
 }
